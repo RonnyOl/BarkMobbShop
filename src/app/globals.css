@@ -2,32 +2,107 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+
+
+.main {
+  height: 100vh;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+.zoom-in-out-box {
+
+  animation: fade-in-right 0.5s ease;
+}
+
+@keyframes fade-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(100px); /* Empieza 50px a la izquierda */
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0); /* Termina en su posición original */
+  }
+}
+.sexossss{
+  overflow: hidden;
+}
+.admProd {
+  background-color: aliceblue;
+  max-height: 30rem;
+  min-height: 30rem;
+  min-width: 50rem;
+  
+}
+
+@media (max-width:1280px) {
+  .admProd {
+  max-height: 50rem;
+  min-height: 50rem;
+  min-width: 30rem;
+  }
+}
+.catalogo-container{
+  min-height: 100vh;
+}
+
+.contenedor-detailed{
+  min-height: 100vh;
+  width: 100%;
+}
+
+.contendor_detailed-img{
+  width: 40%;
+  height: 46rem;
+}
+
+.contendor_detailed-info{
+  width: 60%;
+  height: 46rem;
+}
+
+@media (max-width:1280px) {
+  .contendor_detailed-img{
+    width: 40%;
+    height: 46rem;
+  }
+  .detailed-img_img{
+    width: 500px;
+    min-width: 500px;
+    height: 700px;
+  }
+  .contendor_detailed-info{
+    width: 60%;
+    height: 55rem;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@media (max-width:767px){
+  .contendor_detailed-info{
+    width: 60%;
+    height: 70rem;
+  }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.detailed-img_img{
+  width: 500px;
+  height: 700px;
+}
+
+
+.imageProd {
+  width: 400px;
+  height: 500px;
+}
+nav {
+  border-bottom: 0.5px solid #2c2c2c;
+}
+
+footer {
+  border-top: 0.5px solid #2c2c2c;
+}
+
+.logoImg {
+  min-width: 70px;
+  max-height: 100px;
+  
 }
