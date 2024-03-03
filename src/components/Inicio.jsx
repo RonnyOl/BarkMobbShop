@@ -1,13 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/jsx-no-comment-textnodes */
 import useBackground from "@/hooks/useBackground";
+import { Lato, Inter} from 'next-google-fonts';
 import Link from "next/link";
 import React from "react";
 
 export default function Inicio() {
 
   const estilo = useBackground();
-
+ 
   return (
    
    <>
@@ -21,8 +22,8 @@ export default function Inicio() {
     style={{backgroundColor: "rgba(0, 0, 0, 0.6)"}}>
     <div className="flex h-full items-center justify-center">
       <div className="text-white">
-        <h2 className="mb-4 text-4xl font-semibold">BarkMobb</h2>
-        <h4 className="mb-6 text-xl font-semibold">Qué el estilo te rebalse</h4>
+        <h2 className=" fontTesting3 mb-4 text-[5rem] font-semibold">BarkMobb</h2>
+        <h4 className="mb-6 text-xl font-semibold">Fluye con estilo</h4>
         <Link
           href="/catalogo"
           type="button"

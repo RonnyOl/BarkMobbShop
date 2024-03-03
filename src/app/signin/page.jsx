@@ -40,7 +40,7 @@ const SignIn = () => {
   const handleSignIn = async () => {
     try {
       const res = await signInWithEmailAndPassword(email, password);
-      console.log({ res });
+      // console.log({ res });
       if (!res) {
         seterrors(true);
       } else {
@@ -73,17 +73,17 @@ const SignIn = () => {
     >
       <div className=" flex items-center justify-center min-h-screen bg-black bg-opacity-40 backdrop-blur-[3px]">
         <div className="bg-transparent backdrop-blur border p-10 rounded-lg shadow-xl w-96 text-black">
-          <h1 className=" text-2xl mb-5 text-white">Sign In</h1>
+          <h1 className=" text-2xl mb-5 text-white">Iniciar sesión</h1>
           <input
             type="email"
-            placeholder="Email"
+            placeholder="Email..."
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="w-full p-3 mb-4 bg-transparent text-white outline-none  placeholder-gray-200 border-b "
           />
           <input
             type="password"
-            placeholder="Password"
+            placeholder="Contraseña..."
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="w-full p-3 mb-4 bg-transparent text-white outline-none  placeholder-gray-200 border-b "

@@ -10,7 +10,7 @@ export default function NavBar() {
   const cookies = new Cookies();
   const [user] = useAuthState(auth);
   const router = useRouter();
-  console.log({ user });
+  // console.log({ user });
   const [scrollDesactivado, setScrollDesactivado] = useState(false);
 
   const [isLoggedIn, setisLoggedIn] = useState("");
@@ -38,16 +38,17 @@ export default function NavBar() {
   const menuHandler = () => {
     setmostrarHeader(!mostrarHeader);
     setScrollDesactivado(!scrollDesactivado);
-    console.log(!mostrarHeader);
+    // console.log(!mostrarHeader);
   };
 
   return (
     <>
       <nav className="flex w-full h-20 bg-black text-white items-center">
         <div className="px-12">
+          
           <Link title="Inicio" href="/">
             <img
-              src="BarkLogo.webp"
+              src="../BarkLogo.webp"
               alt="LogoBark"
               className="logoImg"
               title="BarkMobbLogo"
@@ -66,7 +67,7 @@ export default function NavBar() {
             Catálogo
           </Link>
           <Link
-            href="/"
+            href="/contacto"
             className="hidden lg:inline"
             aria-label="Ir a Contacto"
           >
@@ -95,15 +96,15 @@ export default function NavBar() {
           <a onClick={menuHandler}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="icon icon-tabler icon-tabler-menu-2"
+              className="icon icon-tabler icon-tabler-menu-2"
               width="44"
               height="44"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              strokeWidth="1.5"
               stroke="#ffffff"
               fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
               <path d="M4 6l16 0" />
@@ -129,15 +130,15 @@ export default function NavBar() {
                   <li className="flex items-center justify-start gap-3 pl-6">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="w-8 h-8 icon icon-tabler icon-tabler-home-2"
+                      className="w-8 h-8 icon icon-tabler icon-tabler-home-2"
                       width="44"
                       height="44"
                       viewBox="0 0 24 24"
-                      stroke-width="1.5"
+                      strokeWidth="1.5"
                       stroke="#ffffff"
                       fill="none"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     >
                       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                       <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
@@ -152,15 +153,15 @@ export default function NavBar() {
                   <li className="flex items-center justify-start gap-3 pl-6">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="w-8 h-8 icon icon-tabler icon-tabler-brand-shopee"
+                      className="w-8 h-8 icon icon-tabler icon-tabler-brand-shopee"
                       width="44"
                       height="44"
                       viewBox="0 0 24 24"
-                      stroke-width="1.5"
+                      strokeWidth="1.5"
                       stroke="#ffffff"
                       fill="none"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     >
                       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                       <path d="M4 7l.867 12.143a2 2 0 0 0 2 1.857h10.276a2 2 0 0 0 2 -1.857l.867 -12.143h-16z" />
@@ -178,15 +179,15 @@ export default function NavBar() {
                   <li className="flex items-center justify-start gap-3 pl-6">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="w-8 h-8 icon icon-tabler icon-tabler-message-share"
+                      className="w-8 h-8 icon icon-tabler icon-tabler-message-share"
                       width="44"
                       height="44"
                       viewBox="0 0 24 24"
-                      stroke-width="1.5"
+                      strokeWidth="1.5"
                       stroke="#ffffff"
                       fill="none"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     >
                       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                       <path d="M8 9h8" />
@@ -195,7 +196,7 @@ export default function NavBar() {
                       <path d="M16 22l5 -5" />
                       <path d="M21 21.5v-4.5h-4.5" />
                     </svg>
-                    <Link onClick={menuHandler} title="Contacto" href="/">
+                    <Link onClick={menuHandler} title="Contacto" href="/contacto">
                       Contacto
                     </Link>
                   </li>
@@ -207,11 +208,11 @@ export default function NavBar() {
                         width="44"
                         height="44"
                         viewBox="0 0 24 24"
-                        stroke-width="1.5"
+                        strokeWidth="1.5"
                         stroke="#ffffff"
                         fill="none"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       >
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                         <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
@@ -235,15 +236,15 @@ export default function NavBar() {
                     <li className="flex items-center justify-start gap-3 pl-6">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        class="w-8 h-8 icon icon-tabler icon-tabler-user-cancel"
+                        className="w-8 h-8 icon icon-tabler icon-tabler-user-cancel"
                         width="44"
                         height="44"
                         viewBox="0 0 24 24"
-                        stroke-width="1.5"
+                        strokeWidth="1.5"
                         stroke="#ffffff"
                         fill="none"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       >
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                         <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />

@@ -6,7 +6,7 @@ export default function Footer() {
     <>
       <footer className="bg-black text-white w-full h-96 lg:h-36 flex-col justify-center items-center gap-12 text-center  lg:w-full lg:flex-row flex lg:items-center lg:justify-between px-20">
         <div>
-          <img               src="BarkLogo.webp"
+          <img               src="../BarkLogo.webp"
 alt="LogoBark" width="120px" title="BarkMobbLogo"/>
         </div>
 
@@ -25,11 +25,11 @@ alt="LogoBark" width="120px" title="BarkMobbLogo"/>
                 width="44"
                 height="44"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="#ffffff"
                 fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                 <path d="M4 4m0 4a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4z" />

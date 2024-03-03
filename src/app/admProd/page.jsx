@@ -1,6 +1,6 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-"use client";
-import React, { useEffect, useState } from "react";
+
+"use client"
+import { useEffect, useState } from "react";
 
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "@/app/firebase/config";
@@ -12,18 +12,17 @@ import {
   where,
   getDocs,
   addDoc,
-  setDoc,
   updateDoc,
 } from "firebase/firestore";
 import { doc, deleteDoc } from "firebase/firestore";
 import Spinner from "@/components/Spinner";
 import Swal from "sweetalert2";
 
-export default function page() {
+export default function Page() {
   const cookies = new Cookies();
   const router = useRouter();
   const [user] = useAuthState(auth);
-
+  const [isClient, setIsClient] = useState(false)
   const [producto, setproducto] = useState(null);
   const [isLoading, setisLoading] = useState(true);
   const [usuarioValido, setusuarioValido] = useState(false);
@@ -94,21 +93,21 @@ export default function page() {
         const querySnapshot = await getDocs(q);
         // Obtener el primer documento si existe
         const firstDoc = querySnapshot.docs[0];
-        console.log("ME ESTOY RENDERIZANDO 2");
+       
         if (firstDoc) {
           const userData = firstDoc.data();
-          console.log(userData.rol);
+          // console.log(userData.rol);
           // Verificar el rol del usuario
           if (userData.rol === "admin") {
             setusuarioValido(true);
           } else {
-            console.log("El usuario no es un administrador");
+            router.push("/")
           }
         } else {
-          console.log("No se encontraron resultados para el usuario");
+          // console.log("No se encontraron resultados para el usuario");
         }
       } catch (error) {
-        console.error("Error en la consulta a Firestore:", error);
+        // console.error("Error en la consulta a Firestore:", error);
       }
     }
   }
@@ -208,7 +207,6 @@ export default function page() {
     setproducto(
       producto.map((item) => {
         if (item.id === idProducto) {
-          console.log("hola")
           return {
             id: item.id,
             nombre: nombreProd,
@@ -230,7 +228,7 @@ export default function page() {
   };
 
   const precioinputHandler = () => {
-    
+
     setprecioProd(event.target.value);
   };
 
@@ -246,11 +244,15 @@ export default function page() {
    
   }, [producto]);
 
+  useEffect(() => {
+    console.log(isLoggedIn)
+    if (!user && !isLoggedIn) {
+      router.push("/"); // Redirige al usuario a la página de inicio de sesión si no está autenticado
+    }
+  }, [user, isLoggedIn])
+
   return (
     <>
-      {!user && !isLoggedIn ? (
-        router.push("/signin")
-      ) : (
         <>
           {isLoading ? (
             <Spinner></Spinner>
@@ -260,128 +262,54 @@ export default function page() {
               className="h-full w-full bg-black text-white flex flex-col justify-center items-center py-6"
             >
               {producto != null && usuarioValido ? (
-                <>
-                  <div
-                    style={{ minHeight: "100vh" }}
-                    className="pt-6 flex flex-wrap gap-6 items-center justify-center"
-                  >
-                    {producto.map((doc, index) => (
-                      <div
-                        className=" admProd flex flex-nowrap lg:flex-wrap justify-center items-center gap-6 flex-col mt-16 text-black"
-                        key={index}
-                      >
-                        <div>
-                          <img width="300px" src={doc.imagen} />
-                        </div>
-                        <div className="flex flex-col justify-center items-center">
-                          <h2 className="text-3xl">{doc.nombre}</h2>
-                          <p>
-                            Precio: <b>{doc.precio}</b>
-                          </p>
-                          <p>{doc.descripcion}</p>
-                          <p>
-                            {doc.stock == true ? (
-                              <p>Con stock</p>
-                            ) : (
-                              <p>
-                                <b>Sin stock</b>
-                              </p>
-                            )}
-                          </p>
-                          <p>{doc.tipo}</p>
-                          <button
-                            className="p-3 my-6 bg-black text-gray-200 "
-                            onClick={() => {
-                              showSwal(doc.id, doc);
-                            }}
-                          >
-                            Click aquí para borrar
-                          </button>
-                          <button
-                            className="p-3 my-6 bg-black text-gray-200 "
-                            onClick={() => {
-                              updSwal(doc.id, doc);
-                            }}
-                          >
-                            Click aquí para editar
-                          </button>
-                        </div>
+                <div
+                  style={{ minHeight: "100vh" }}
+                  className="pt-6 flex flex-wrap gap-6 items-center justify-center"
+                >
+                  {producto.map((doc, index) => (
+                    <div
+                      className=" admProd flex flex-nowrap lg:flex-wrap justify-center items-center gap-6 flex-col mt-16 text-black"
+                      key={index}
+                    >
+                      <div>
+                        <img width="300px" src={doc.imagen} />
                       </div>
-                    ))}
-                  </div>
-                  <>
-                    <div className="flex justify-center items-center">
-                      <button
-                        className="p-3 my-6 bg-white text-gray-700 "
-                        onClick={() => {
-                          setmostrarAdd(!mostrarAdd);
-                        }}
-                      >
-                        {mostrarAdd ? <>Ocultar</> : <>Añadir nuevo</>}
-                      </button>
-                    </div>
-                    {mostrarAdd && (
-                      <div className=" flex-col bg-white text-black w-96 h-[46rem] py-36 flex justify-center items-center gap-6">
-                        <h2>Nombre</h2>
-                        <input
-                          className="border-4 border-gray-500/100 p-1 text-gray-500"
-                          onChange={nameinputHandler}
-                          type="text"
-                          placeholder="Nombre a agregar"
-                        />
-                        <h2>Precio</h2>
-                        <input
-                          className="border-4 border-gray-500/100 p-1 text-gray-500"
-                          onChange={precioinputHandler}
-                          type="text"
-                          placeholder="Precio a agregar"
-                        />
-                        <h2>Descripcion</h2>
-                        <input
-                          className="border-4 border-gray-500/100 p-1 text-gray-500"
-                          onChange={() => {
-                            setdescripcionProd(event.target.value);
-                          }}
-                          type="text"
-                          placeholder="Descripcion a agregar"
-                        />
-                        <h2>Imagen</h2>
-                        <input
-                          className="border-4 border-gray-500/100 p-1 text-gray-500"
-                          onChange={() => {
-                            setimgProd(event.target.value);
-                          }}
-                          type="text"
-                          placeholder="Imagen a agregar"
-                        />
-                        <h2>Tipo</h2>
-                        <input
-                          className="border-4 border-gray-500/100 p-1 text-gray-500"
-                          onChange={() => {
-                            settipoProd(event.target.value);
-                          }}
-                          type="text"
-                          placeholder="Tipo a agregar"
-                        />
+                      <div className="flex flex-col justify-center items-center">
+                        <h2 className="text-3xl">{doc.nombre}</h2>
+                        <p>
+                          Precio: <b>{doc.precio}</b>
+                        </p>
+                        <p>{doc.descripcion}</p>
                         
-                        <div className="flex gap-2">
-                        <h2>Stock</h2>
-                        <input
-                          className="border-4 border-gray-500/100 p-1 text-gray-500"
-                          onChange={() => {
-                            setisStockProd(event.target.value);
+                          {doc.stock == true ? (
+                            <p>Con stock</p>
+                          ) : (
+                            <p>
+                              <b>Sin stock</b>
+                            </p>
+                          )}
+                        
+                        <p>{doc.tipo}</p>
+                        <button
+                          className="p-3 my-6 bg-black text-gray-200 "
+                          onClick={() => {
+                            showSwal(doc.id, doc);
                           }}
-                          type="checkbox"
-                          placeholder="Stock a agregar"
-                        /></div>
-
-                        <button onClick={addProduct} className=" border-4 border-gray-500/100 bg-gray-600 py-2 px-12 text-white ">
-                          Añadir
+                        >
+                          Click aquí para borrar
+                        </button>
+                        <button
+                          className="p-3 my-6 bg-black text-gray-200 "
+                          onClick={() => {
+                            updSwal(doc.id, doc);
+                          }}
+                        >
+                          Click aquí para editar
                         </button>
                       </div>
-                    )}
-                  </>
-                </>
+                    </div>
+                  ))}
+                </div>
               ) : (
                 <div
                   style={{ minHeight: "100vh" }}
@@ -390,10 +318,84 @@ export default function page() {
                   No tienes acceso
                 </div>
               )}
+              <div className="flex justify-center items-center">
+                <button
+                  className="p-3 my-6 bg-white text-gray-700 "
+                  onClick={() => {
+                    setmostrarAdd(!mostrarAdd);
+                  }}
+                >
+                  {mostrarAdd ? <>Ocultar</> : <>Añadir nuevo</>}
+                </button>
+              </div>
+              {mostrarAdd && (
+                <div className=" flex-col bg-white text-black w-96 h-[46rem] py-36 flex justify-center items-center gap-6">
+                  <h2>Nombre</h2>
+                  <input
+                    className="border-4 border-gray-500/100 p-1 text-gray-500"
+                    onChange={nameinputHandler}
+                    type="text"
+                    placeholder="Nombre a agregar"
+                  />
+                  <h2>Precio</h2>
+                  <input
+                    className="border-4 border-gray-500/100 p-1 text-gray-500"
+                    onChange={precioinputHandler}
+                    type="text"
+                    placeholder="Precio a agregar"
+                  />
+                  <h2>Descripcion</h2>
+                  <input
+                    className="border-4 border-gray-500/100 p-1 text-gray-500"
+                    onChange={() => {
+                      setdescripcionProd(event.target.value);
+                    }}
+                    type="text"
+                    placeholder="Descripcion a agregar"
+                  />
+                  <h2>Imagen</h2>
+                  <input
+                    className="border-4 border-gray-500/100 p-1 text-gray-500"
+                    onChange={() => {
+                      setimgProd(event.target.value);
+                    }}
+                    type="text"
+                    placeholder="Imagen a agregar"
+                  />
+                  <h2>Tipo</h2>
+                  <input
+                    className="border-4 border-gray-500/100 p-1 text-gray-500"
+                    onChange={() => {
+                      settipoProd(event.target.value);
+                    }}
+                    type="text"
+                    placeholder="Tipo a agregar"
+                  />
+                  <div className="flex gap-2">
+                    <h2>Stock</h2>
+                    <input
+                      className="border-4 border-gray-500/100 p-1 text-gray-500"
+                      onChange={() => {
+                        setisStockProd(event.target.value);
+                      }}
+                      type="checkbox"
+                      placeholder="Stock a agregar"
+                    />
+                  </div>
+                  <button
+                    onClick={addProduct}
+                    className=" border-4 border-gray-500/100 bg-gray-600 py-2 px-12 text-white "
+                  >
+                    Añadir
+                  </button>
+                </div>
+              )}
             </div>
           )}
         </>
-      )}
+      
     </>
   );
+  
 }
+

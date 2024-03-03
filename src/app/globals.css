@@ -3,6 +3,18 @@
 @tailwind utilities;
 
 
+.fontTesting {
+  font-family: var(--font-lato);
+}
+.fontTesting2{
+  font-family: var(--font-inter);
+}
+.fontTesting3 {
+  font-family: var(--font-slacksideOne);
+}
+* {
+  font-family: var(--font-inter);
+}
 
 .main {
   height: 100vh;

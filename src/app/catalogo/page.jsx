@@ -36,7 +36,7 @@ export default function page() {
     });
     productosData.sort((a, b) => a.nombre.toLowerCase().localeCompare(b.nombre)); // Ordenar los productos normalizados
 
-    console.log(productosData);
+    // console.log(productosData);
     setproducto(productosData);
     setisLoading(false);
   }
